@@ -1,0 +1,11 @@
+.env
+.DS_Store
+.idea/
+.local/
+.superpowers/
+.worktrees/
+*.log
+target/
+**/target/
+evaluation/answers.md
+evaluation/reliability.md

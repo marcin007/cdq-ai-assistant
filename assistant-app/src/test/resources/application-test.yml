@@ -1,0 +1,30 @@
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration
+      - org.springframework.ai.model.ollama.autoconfigure.OllamaChatAutoConfiguration
+      - org.springframework.ai.model.ollama.autoconfigure.OllamaEmbeddingAutoConfiguration
+      - org.springframework.ai.mcp.client.common.autoconfigure.McpClientAutoConfiguration
+      - org.springframework.ai.mcp.client.common.autoconfigure.McpToolCallbackAutoConfiguration
+  ai:
+    ollama:
+      chat:
+        enabled: false
+      embedding:
+        enabled: false
+    mcp:
+      client:
+        enabled: false
+      server:
+        enabled: false
+  flyway:
+    enabled: false
+
+cdq:
+  rag:
+    enabled: false
+
+assistant:
+  chat:
+    enabled: false

@@ -1,0 +1,46 @@
+#!/bin/sh
+set -eu
+
+state=${LOCAL_OPS_FAKE_STATE:?}
+if [ "${1:-}" = '-version' ]; then
+    version=$(sed -n '1p' "$state/java-version")
+    printf '%s\n' "openjdk version \"$version\"" >&2
+    exit 0
+fi
+
+case "${1:-}" in
+    -Dcdq.local.instance=*)
+        instance_token=${1#-Dcdq.local.instance=}
+        case "$instance_token" in
+            ''|*[!0-9a-fA-F]*)
+                exit 2
+                ;;
+        esac
+        [ "${#instance_token}" -eq 32 ] || exit 2
+        shift
+        ;;
+esac
+[ "${1:-}" = '-jar' ] || exit 2
+jar=${2:-}
+[ "$#" -eq 2 ] || exit 2
+case "$jar" in
+    */countries-mcp-server-*.jar)
+        service=countries
+        ;;
+    */assistant-app-*.jar)
+        service=assistant
+        ;;
+    *)
+        exit 2
+        ;;
+esac
+printf '%s\n' "java $service" >> "$state/events"
+printf '%s\n' "$PWD" > "$state/$service-cwd"
+if [ "$service" = 'assistant' ]; then
+    printf '%s|%s\n' \
+        "${BUILD_COMMIT:-}" "${BUILD_WORKTREE_CLEAN:-}" > "$state/assistant-build"
+fi
+trap 'exit 0' HUP INT TERM
+while :; do
+    sleep 1
+done

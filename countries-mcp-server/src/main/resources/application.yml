@@ -1,0 +1,26 @@
+server:
+  address: 127.0.0.1
+  port: 8081
+
+spring:
+  application:
+    name: countries-mcp-server
+  config:
+    import: optional:file:.env[.properties]
+  ai:
+    mcp:
+      server:
+        protocol: STREAMABLE
+        type: SYNC
+        streamable-http:
+          mcp-endpoint: /mcp
+
+countries:
+  api-base-url: https://api.restcountries.com/countries/v5
+  api-key: ${REST_COUNTRIES_API_KEY}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

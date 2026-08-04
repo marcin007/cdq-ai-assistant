@@ -1,0 +1,61 @@
+#!/bin/sh
+set -eu
+
+state=${LOCAL_OPS_FAKE_STATE:?}
+[ "${1:-}" = '-C' ] || exit 2
+checkout=$2
+shift 2
+case "$*" in
+    'rev-parse HEAD')
+        case "$checkout" in
+            */.local/mcp-weather)
+                sed -n '1p' "$state/weather-head"
+                ;;
+            *)
+                sed -n '1p' "$state/project-head"
+                ;;
+        esac
+        ;;
+    'status --porcelain --untracked-files=normal'|'status --porcelain --untracked-files=normal -- . :(exclude,literal)evaluation/answers.md')
+        case "$checkout" in
+            */.local/mcp-weather)
+                weather_status=$(sed -n '1p' "$state/weather-status")
+                case "$weather_status" in
+                    error)
+                        exit 2
+                        ;;
+                    dirty)
+                        printf '%s\n' ' M package-lock.json'
+                        ;;
+                    untracked)
+                        printf '%s\n' '?? unexpected.ts'
+                        ;;
+                esac
+                ;;
+            *)
+                project_status=$(sed -n '1p' "$state/project-status")
+                case "$project_status" in
+                    clean)
+                        ;;
+                    error)
+                        exit 2
+                        ;;
+                    *)
+                        printf '%s\n' ' M README.md'
+                        ;;
+                esac
+                ;;
+        esac
+        ;;
+    'status --porcelain --untracked-files=no')
+        if [ "$(sed -n '1p' "$state/weather-status")" = 'dirty' ]; then
+            printf '%s\n' ' M package-lock.json'
+        fi
+        ;;
+    'remote get-url origin')
+        sed -n '1p' "$state/weather-remote"
+        ;;
+    *)
+        exit 2
+        ;;
+esac

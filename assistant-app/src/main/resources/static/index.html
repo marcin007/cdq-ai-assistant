@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CDQ AI Assistant</title>
+  <link rel="stylesheet" href="/css/chat.css">
+  <script type="module" src="/js/knowledge.mjs"></script>
+  <script type="module" src="/js/chat.mjs"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-width">
+      <p class="eyebrow">CDQ AI Assistant</p>
+      <h1 id="page-title">Ask about CDQ Fraud Guard, countries, or the weather</h1>
+      <p>Each question is answered independently. This page does not save chat history.</p>
+    </div>
+  </header>
+  <main id="main-content" class="page-width" aria-labelledby="page-title">
+    <section id="knowledge-panel" class="knowledge" aria-labelledby="knowledge-title" aria-busy="false">
+      <div class="knowledge-heading">
+        <div>
+          <p class="eyebrow">Knowledge operations</p>
+          <h2 id="knowledge-title">CDQ knowledge</h2>
+        </div>
+        <button id="knowledge-check" type="button">Check website</button>
+      </div>
+      <p id="knowledge-source" class="knowledge-summary">Source: Loading…</p>
+      <p id="knowledge-active" class="knowledge-summary">Active knowledge: Loading…</p>
+      <p id="knowledge-last-scan" class="knowledge-summary">Last scan: Loading…</p>
+      <p id="knowledge-status" class="knowledge-status" role="status" aria-live="polite" hidden></p>
+      <p id="knowledge-error" class="error" role="alert" hidden></p>
+      <div id="knowledge-result" class="knowledge-result" hidden></div>
+      <div id="knowledge-diff" class="knowledge-diff" hidden></div>
+      <textarea id="knowledge-comment" rows="3" maxlength="500" aria-label="Approval comment (optional)"
+                placeholder="Approval comment (optional)" hidden></textarea>
+      <div class="knowledge-actions">
+        <button id="knowledge-discard" type="button" hidden>Discard change</button>
+        <button id="knowledge-approve" type="button" hidden>Approve change</button>
+        <button id="knowledge-ingest" type="button" hidden>Ingest approved version</button>
+      </div>
+    </section>
+    <section class="chat" aria-labelledby="chat-title">
+      <h2 id="chat-title">Chat</h2>
+      <div id="transcript" class="transcript" role="log" aria-live="polite"
+           aria-relevant="additions text" aria-busy="false" aria-label="Chat transcript"></div>
+      <p id="chat-status" class="visually-hidden" role="status" aria-live="polite"></p>
+      <p id="chat-error" class="error" role="alert" hidden></p>
+      <form id="chat-form" method="post" action="/api/chat" novalidate>
+        <label for="message">Your question</label>
+        <textarea id="message" rows="4" maxlength="2000"
+                  aria-describedby="message-help" required></textarea>
+        <p id="message-help">Press Enter to send. Press Shift+Enter for a new line.</p>
+        <div class="form-actions">
+          <button id="send" type="submit">Send</button>
+        </div>
+      </form>
+    </section>
+    <section class="prompts" aria-labelledby="prompt-title">
+      <h2 id="prompt-title">Try an example</h2>
+      <div class="prompt-list">
+        <button type="button" class="prompt-chip" data-prompt="What is the capital city of Germany?">What is the capital city of Germany?</button>
+        <button type="button" class="prompt-chip" data-prompt="What is the temperature currently in Munich?">What is the temperature currently in Munich?</button>
+        <button type="button" class="prompt-chip" data-prompt="What is the temperature of the capital of Germany currently?">What is the temperature of the capital of Germany currently?</button>
+        <button type="button" class="prompt-chip" data-prompt="What do you know about Berlin?">What do you know about Berlin?</button>
+        <button type="button" class="prompt-chip" data-prompt="Which CDQ Fraud Guard features help prevent payment fraud?">Which CDQ Fraud Guard features help prevent payment fraud?</button>
+        <button type="button" class="prompt-chip" data-prompt="What is Japan’s capital and what is the current temperature there?">What is Japan’s capital and what is the current temperature there?</button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

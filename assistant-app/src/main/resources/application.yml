@@ -1,0 +1,76 @@
+server:
+  address: 127.0.0.1
+  port: 8080
+
+cdq:
+  knowledge:
+    source-url: ${CDQ_KNOWLEDGE_SOURCE_URL:https://www.cdq.com/products/cdq-fraud-guard}
+    connect-timeout: 5s
+    request-timeout: 15s
+    max-response-bytes: 2097152
+
+spring:
+  application:
+    name: assistant-app
+  config:
+    import: optional:file:.env[.properties]
+  http:
+    clients:
+      read-timeout: 40s
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:127.0.0.1}:${POSTGRES_PORT:5432}/${POSTGRES_DB:cdq_assistant}
+    username: ${POSTGRES_USER:cdq}
+    password: ${POSTGRES_PASSWORD:cdq}
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://127.0.0.1:11434}
+      chat:
+        model: ${assistant.chat.model}
+        temperature: 0.1
+      embedding:
+        model: qwen3-embedding:0.6b
+      init:
+        pull-model-strategy: never
+    vectorstore:
+      pgvector:
+        dimensions: 1024
+        distance-type: cosine-distance
+        index-type: hnsw
+        initialize-schema: false
+    mcp:
+      client:
+        type: SYNC
+        request-timeout: 20s
+        streamable-http:
+          connections:
+            countries:
+              url: ${COUNTRIES_MCP_URL:http://127.0.0.1:8081}
+              endpoint: /mcp
+        stdio:
+          connections:
+            weather:
+              command: node
+              args:
+                - .local/mcp-weather/node_modules/tsx/dist/cli.mjs
+                - .local/mcp-weather/src/index.ts
+              env:
+                WEATHER_API_URL: ${WEATHER_API_URL:https://api.weatherapi.com/v1/current.json}
+                WEATHER_API_KEY: ${WEATHER_API_KEY}
+    tools:
+      throw-exception-on-error: true
+
+assistant:
+  chat:
+    model: qwen3:4b-instruct-2507-q4_K_M
+    max-output-tokens: 256
+    timeout: 45s
+
+logging:
+  level:
+    org.springframework.ai.mcp.SyncMcpToolCallback: "OFF"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

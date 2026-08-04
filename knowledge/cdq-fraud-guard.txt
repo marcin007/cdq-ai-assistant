@@ -1,0 +1,52 @@
+CDQ Fraud Guard
+
+Protect Your Business, Secure Your Transactions
+
+In today's digital economy, businesses face increasing threats from payment fraud and inaccurate bank account information. CDQ Fraud Guard offers a robust service to manage and verify global payment data, providing peace of mind that your transactions are secure and compliant.
+
+Combat Payment Fraud Collaboratively with the CDQ Fraud Guard
+
+Fraudulent activities such as falsified invoices can cause immense financial damage. Identifying bank accounts that do not belong to the declared business partner but to an attacker is a critical challenge. CDQ Fraud Guard leverages the power of community-shared data on proven bank accounts and known fraud cases to help you identify and prevent fraud, ensuring the integrity of your payment processes.
+
+Protect Your Business from Payment Fraud
+
+CDQ Fraud Guard integrates advanced verification and alert systems to protect your business from payment fraud. By utilizing a shared database of verified bank accounts and known fraud cases, CDQ Fraud Guard ensures your financial transactions are secure and reliable, keeping your business safe.
+
+At a glance
+
+Key Features of CDQ Fraud Guard
+
+- Bank Account Verification: Utilizes a shared database of validated bank accounts to verify new bank account information before operational use.
+- Trust Score: Assigns a trust score to bank accounts based on the number of successful transactions, customizable to fit your risk appetite.
+- Payment Fraud Alerts: Warns community members about potential fraud attacks by maintaining and sharing known fraud cases.
+- Fraud Case Management: Allows users to document, manage, and look up fraud cases to identify critical accounts and prevent fraud.
+- Seamless Integration: Easily integrates with existing financial systems through a robust API, enhancing workflow efficiencies without requiring a dedicated interface.
+
+CDQ Fraud Guard Highlights
+
+Enhanced Security
+
+Reduce the risk of fraud by verifying bank account data against a shared database of validated accounts and known fraud cases.
+
+Operational Efficiency
+
+Streamline the process of verifying bank account data and managing fraud cases, saving time and resources.
+
+Customizable Trust Scores
+
+Allows customization of trust scores based on the number of transactions, ensuring the system aligns with your specific risk management needs.
+
+Community-Driven Data
+
+Leverages the power of the CDQ Data Sharing community to provide reliable and up-to-date information on bank accounts and fraud cases.
+
+Real-Time Fraud Alerts
+
+Provides immediate alerts on potential fraud cases, enabling quick response and prevention.
+
+CDQ Fraud Guard in Action
+
+Before implementing CDQ Trust Score, documentation was piling up and business partner onboarding took up to one month. Now, the green or yellow light as a trust score lets us move ahead with no additional documentation and efforts.
+
+Arnab Kundu
+Global Process Expert MDM at Clariant

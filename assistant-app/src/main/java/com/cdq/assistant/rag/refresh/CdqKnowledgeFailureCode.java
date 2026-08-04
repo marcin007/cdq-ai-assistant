@@ -1,0 +1,7 @@
+package com.cdq.assistant.rag.refresh;
+
+public enum CdqKnowledgeFailureCode {
+    SOURCE_UNAVAILABLE, SOURCE_TIMEOUT, SOURCE_RESPONSE_INVALID,
+    SOURCE_CONTENT_INVALID, VERSION_NOT_FOUND, VERSION_STATE_CONFLICT,
+    INGEST_UNAVAILABLE
+}

@@ -1,0 +1,25 @@
+#!/bin/sh
+set -eu
+
+state=${LOCAL_OPS_FAKE_STATE:?}
+url=
+for argument do
+    url=$argument
+done
+case "$url" in
+    http://127.0.0.1:8081/actuator/health)
+        printf '%s\n' 'health countries' >> "$state/events"
+        : > "$state/countries-health"
+        ;;
+    http://127.0.0.1:8080/actuator/health)
+        if [ -e "$state/fail-assistant-health" ]; then
+            exit 22
+        fi
+        printf '%s\n' 'health assistant' >> "$state/events"
+        : > "$state/assistant-health"
+        ;;
+    *)
+        exit 22
+        ;;
+esac
+printf '%s\n' '{"status":"UP"}'

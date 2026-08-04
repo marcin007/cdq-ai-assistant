@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+state=${LOCAL_OPS_FAKE_STATE:?}
+[ "$*" = '--batch-mode package' ] || exit 2
+printf '%s\n' 'maven package' >> "$state/events"
+mkdir -p assistant-app/target countries-mcp-server/target
+: > assistant-app/target/assistant-app-0.0.1-SNAPSHOT.jar
+: > countries-mcp-server/target/countries-mcp-server-0.0.1-SNAPSHOT.jar

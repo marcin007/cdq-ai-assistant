@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Interactive architecture walkthrough for the CDQ AI Assistant recruitment project."
+    >
+    <title>CDQ AI Assistant — Architecture Walkthrough</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <script type="module" src="./assets/app.mjs"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="CDQ AI Assistant home">
+          <span class="brand-mark" aria-hidden="true">CA</span>
+          <span>CDQ AI Assistant</span>
+        </a>
+        <nav aria-label="Primary navigation">
+          <a href="#architecture">Architecture</a>
+          <a href="#scenarios">Scenarios</a>
+          <a href="#verification">Verification</a>
+        </nav>
+        <a class="header-link" href="https://github.com/marcin007/cdq-ai-assistant">View source</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero shell" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Interactive architecture walkthrough</p>
+          <h1 id="hero-title">One assistant.<br>Three trusted sources.</h1>
+          <p class="hero-lead">
+            A stateless local Java assistant combining CDQ product knowledge, country facts,
+            and current weather through RAG and MCP.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="#architecture">Explore the request flow</a>
+            <a
+              class="button secondary"
+              href="https://github.com/marcin007/cdq-ai-assistant#quick-start"
+            >Run locally</a>
+          </div>
+          <p class="honesty-note">
+            <strong>This is not a live assistant.</strong>
+            It is a static walkthrough of the implemented system.
+          </p>
+        </div>
+
+        <aside class="hero-summary" aria-label="Project summary">
+          <div class="summary-heading">
+            <p class="label">System profile</p>
+            <span class="status">Local-first</span>
+          </div>
+          <dl class="summary-list">
+            <div>
+              <dt>Runtime</dt>
+              <dd>Java 21 · Spring AI 2.0</dd>
+            </div>
+            <div>
+              <dt>Generation</dt>
+              <dd>Ollama · qwen3:4b</dd>
+            </div>
+            <div>
+              <dt>Grounding</dt>
+              <dd>pgvector RAG · 2 MCP transports</dd>
+            </div>
+            <div>
+              <dt>Request model</dt>
+              <dd>Stateless · 4 model calls maximum</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="section shell" id="sources" aria-labelledby="sources-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Knowledge boundaries</p>
+            <h2 id="sources-title">Three explicit sources</h2>
+          </div>
+          <p>
+            The model chooses a focused tool instead of treating its own generated text as
+            evidence.
+          </p>
+        </div>
+        <div class="source-grid" data-source-list></div>
+      </section>
+
+      <section class="section section-tinted" id="architecture" aria-labelledby="architecture-title">
+        <div class="shell">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Data flow</p>
+              <h2 id="architecture-title">Follow a request through the system</h2>
+            </div>
+            <p>Select a source above to inspect its real transport and upstream.</p>
+          </div>
+
+          <div class="flow-panel">
+            <ol class="flow-track" data-architecture aria-label="Selected request flow"></ol>
+            <div class="selection-detail" data-source-detail aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell" id="scenarios" aria-labelledby="scenarios-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Required evaluation</p>
+            <h2 id="scenarios-title">Trace the six recruitment scenarios</h2>
+          </div>
+          <p>Each walkthrough shows expected tool use, not a stored model answer.</p>
+        </div>
+        <div class="scenario-layout">
+          <div class="scenario-list" data-scenario-list aria-label="Required scenarios"></div>
+          <article class="scenario-detail" data-scenario-detail aria-live="polite"></article>
+        </div>
+      </section>
+
+      <section class="section section-tinted" id="decisions" aria-labelledby="decisions-title">
+        <div class="shell">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Engineering choices</p>
+              <h2 id="decisions-title">Designed for traceability and local control</h2>
+            </div>
+            <p>The project favors explicit boundaries and repeatable local operation.</p>
+          </div>
+          <div class="decision-grid" data-decision-list></div>
+        </div>
+      </section>
+
+      <section class="section shell" id="verification" aria-labelledby="verification-title">
+        <div class="verification-panel">
+          <div>
+            <p class="eyebrow">Evidence</p>
+            <h2 id="verification-title">Automated verification with an honest live boundary</h2>
+            <p>
+              Offline suites verify Java behavior, MCP contracts, browser behavior, lifecycle
+              scripts, and the evaluator without provider keys.
+            </p>
+            <p class="verification-note">
+              <code>evaluation/answers.md</code> is published only after all six live scenarios
+              pass.
+            </p>
+          </div>
+          <pre aria-label="Verification commands"><code>./mvnw --batch-mode verify
+node --test showcase/tests/showcase.test.mjs
+node scripts/evaluate.mjs</code></pre>
+        </div>
+      </section>
+
+      <section class="section shell final-cta" aria-labelledby="run-title">
+        <p class="eyebrow">Run the real assistant</p>
+        <h2 id="run-title">Bring your own local models and API keys.</h2>
+        <p>
+          The repository includes exact setup, preflight, start, stop, test, and live-evaluation
+          commands for macOS and Linux.
+        </p>
+        <a
+          class="button primary"
+          href="https://github.com/marcin007/cdq-ai-assistant#quick-start"
+        >Open the operating guide</a>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell footer-inner">
+        <p>Static project walkthrough. The real assistant and all dependencies run locally.</p>
+        <a href="https://github.com/marcin007/cdq-ai-assistant#operations-reference">
+          Read the full operations reference
+        </a>
+      </div>
+    </footer>
+
+    <noscript>
+      <p class="noscript">Enable JavaScript to explore sources and scenario steps.</p>
+    </noscript>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+#!/bin/sh
+set -eu
+
+state=${LOCAL_OPS_FAKE_STATE:?}
+if [ "${1:-}" = '--version' ]; then
+    printf '%s\n' '10.8.0'
+    exit 0
+fi
+
+case "$*" in
+    "--prefix "*" ls --depth=0 --offline")
+        [ "$(sed -n '1p' "$state/weather-dependencies")" = 'ready' ]
+        ;;
+    *)
+        exit 2
+        ;;
+esac

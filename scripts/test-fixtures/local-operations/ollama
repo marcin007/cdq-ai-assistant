@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+state=${LOCAL_OPS_FAKE_STATE:?}
+[ "${1:-}" = 'list' ] || exit 2
+printf '%s\n' 'NAME ID SIZE MODIFIED'
+while IFS= read -r model; do
+    [ -n "$model" ] && printf '%s\n' "$model"
+done < "$state/models"
